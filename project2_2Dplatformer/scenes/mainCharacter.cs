@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class mainCharacter : CharacterBody2D
+public partial class MainCharacter : CharacterBody2D
 {
 	public const float Speed = 350.0f;
 	public const float JumpVelocity = -1000.0f;
@@ -37,7 +37,7 @@ public partial class mainCharacter : CharacterBody2D
 			velocity.Y = JumpVelocity;
 
 		// Get the input direction and handle the movement/deceleration.
-		Vector2 direction = Input.GetVector("left", "right", "up", "down");
+		Vector2 direction = Input.GetVector("left", "right", "ui_up", "ui_down");
 		if (direction != Vector2.Zero)
 		{
 			velocity.X = direction.X * Speed;
