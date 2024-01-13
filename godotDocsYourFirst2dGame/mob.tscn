@@ -1,0 +1,92 @@
+[gd_scene load_steps=16 format=3 uid="uid://bhpr5ldiar671"]
+
+[ext_resource type="Script" path="res://Mob.cs" id="1_5kld7"]
+[ext_resource type="Texture2D" uid="uid://kmt42gfhju6m" path="res://art/enemyFlyingAlt_1.png" id="1_km56e"]
+[ext_resource type="Texture2D" uid="uid://blal5v4w8yr6t" path="res://art/enemyFlyingAlt_2.png" id="2_rhy7f"]
+[ext_resource type="Texture2D" uid="uid://by4x1vylvxki1" path="res://art/enemySwimming_1.png" id="3_elqd8"]
+[ext_resource type="Texture2D" uid="uid://ghpeppkvqhb" path="res://art/enemySwimming_2.png" id="4_fsjqa"]
+[ext_resource type="Texture2D" uid="uid://7opuumyrtb4a" path="res://art/enemyWalking_1.png" id="5_o8w2k"]
+[ext_resource type="Texture2D" uid="uid://cbicyex2lybg0" path="res://art/enemyWalking_2.png" id="6_og6ui"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cl3gy"]
+atlas = ExtResource("1_km56e")
+region = Rect2(0, 0, 109, 152)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ov7d5"]
+atlas = ExtResource("2_rhy7f")
+region = Rect2(0, 0, 72, 186)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_63e28"]
+atlas = ExtResource("3_elqd8")
+region = Rect2(0, 0, 132, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_itc3g"]
+atlas = ExtResource("4_fsjqa")
+region = Rect2(0, 0, 132, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wt4sr"]
+atlas = ExtResource("5_o8w2k")
+region = Rect2(0, 0, 132, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f7m4k"]
+atlas = ExtResource("6_og6ui")
+region = Rect2(0, 0, 125, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b2mnj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cl3gy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ov7d5")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_63e28")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_itc3g")
+}],
+"loop": true,
+"name": &"swim",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wt4sr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f7m4k")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 3.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cm28f"]
+radius = 35.0
+height = 96.0
+
+[node name="Mob" type="RigidBody2D" groups=["mobs"]]
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_5kld7")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_b2mnj")
+animation = &"fly"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_cm28f")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="OnVisibleOnScreenNotifier2DScreenExited"]
